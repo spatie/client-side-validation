@@ -23,25 +23,25 @@ export const init = () => {
 
         const formErrors = new ErrorBag();
 
-    $.each($(e.target).find('input'), function (i, el) {
+        $.each($(e.target).find('input'), function (i, el) {
 
-        const $input = $(el);
-        const errors = validateInput($input);
+            const $input = $(el);
+            const errors = validateInput($input);
 
-        formErrors.merge(errors);
+            formErrors.merge(errors);
 
-        if (formErrors.isEmpty()) {
-            clearInputError($input);
-            return;
+            if (formErrors.isEmpty()) {
+                clearInputError($input);
+                return;
+            }
+
+            setInputError($input, errors.last());
+        });
+
+        if (formErrors.hasErrors()) {
+            e.preventDefault();
         }
-
-        setInputError($input, errors.last());
     });
-
-    if (formErrors.hasErrors()) {
-        e.preventDefault();
-    }
-});
 };
 
 export default init;
