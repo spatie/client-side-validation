@@ -31,7 +31,8 @@ validation.init();
 ```
 
 ```html
-<!-- Your form requires a `data-validate` attribute. The validation will then be applied on inputs with validation attributes. -->
+<!-- Your form requires a `data-validate` attribute. -->
+<!-- The validation will be applied on all inputs with validation attributes. -->
 <form data-validate>
     <input type=text required>
     <input type=email>
