@@ -7,16 +7,12 @@
         "semi": [2, "always"],
         "strict": [2, "never"]
     },
-    "globals": {
-        "$": true
-    },
-    "ecmaFeatures": {
-        "modules": true
+    "parserOptions": {
+        "sourceType": "module"
     },
     "env": {
         "es6": true,
-        "browser": true,
-        "node": true
+        "browser": true
     },
     "extends": "eslint:recommended"
 }

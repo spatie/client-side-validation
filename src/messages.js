@@ -25,4 +25,4 @@ const messages = {
 
 export const parseMessage = (message, parameters = {}) => {
     return messages[LANG][message].replace(/:[\w]+/g, (key => parameters[key.slice(1)] || key));
-}
+};
