@@ -47,4 +47,4 @@ export const validation = {
     },
 };
 
-export default validation.init;
+export default validation;

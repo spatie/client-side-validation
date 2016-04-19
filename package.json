@@ -1,6 +1,6 @@
 {
   "name": "client-side-validation",
-  "version": "0.1.0",
+  "version": "0.1.2",
   "description": "Client side form validation",
   "main": "lib/index.js",
   "scripts": {
