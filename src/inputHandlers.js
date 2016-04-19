@@ -26,10 +26,10 @@ export const validateInput = $input => {
 };
 
 export const clearInputError = $input => {
-    $input.next('[data-validation-error]').text('');
+    $input.nextAll('[data-validation-error]').first().text('');
 };
 
 export const setInputError = ($input, error) => {
-    $input.next('[data-validation-error]')
+    $input.nextAll('[data-validation-error]').first()
         .text(parseMessage(error[0], error[1]));
 };
