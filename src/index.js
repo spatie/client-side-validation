@@ -2,46 +2,49 @@ import $ from 'jquery';
 import ErrorBag from './ErrorBag';
 import { validateInput, clearInputError, setInputError } from './inputHandlers';
 
-export const init = () => {
+export const validation = {
 
-    $('[data-validate] input').on('blur keyup', function(e) {
+    init() {
 
-        const $input = $(e.target);
-        const errors = validateInput($input);
+        $('[data-validate] input').on('blur keyup', function(e) {
 
-        if (errors.isEmpty()) {
-            clearInputError($input);
-            return;
-        }
-
-        if (e.type === 'blur') {
-            setInputError($input, errors.last());
-        }
-    });
-
-    $('[data-validate]').on('submit', e => {
-
-        const formErrors = new ErrorBag();
-
-        $.each($(e.target).find('input'), function (i, el) {
-
-            const $input = $(el);
+            const $input = $(e.target);
             const errors = validateInput($input);
 
-            formErrors.merge(errors);
-
-            if (formErrors.isEmpty()) {
+            if (errors.isEmpty()) {
                 clearInputError($input);
                 return;
             }
 
-            setInputError($input, errors.last());
+            if (e.type === 'blur') {
+                setInputError($input, errors.last());
+            }
         });
 
-        if (formErrors.hasErrors()) {
-            e.preventDefault();
-        }
-    });
+        $('[data-validate]').on('submit', e => {
+
+            const formErrors = new ErrorBag();
+
+            $.each($(e.target).find('input'), function (i, el) {
+
+                const $input = $(el);
+                const errors = validateInput($input);
+
+                formErrors.merge(errors);
+
+                if (formErrors.isEmpty()) {
+                    clearInputError($input);
+                    return;
+                }
+
+                setInputError($input, errors.last());
+            });
+
+            if (formErrors.hasErrors()) {
+                e.preventDefault();
+            }
+        });
+    },
 };
 
-export default init;
+export default validation.init;
