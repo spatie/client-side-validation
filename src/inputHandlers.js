@@ -25,11 +25,24 @@ export const validateInput = $input => {
     return errors;
 };
 
+const getInputError = $input => {
+    return $input.parents('[data-validate]')
+        .find(`[data-validation-error="${$input.attr('name')}"]`);
+};
+
 export const clearInputError = $input => {
-    $input.nextAll('[data-validation-error]').first().text('');
+    getInputError($input).text('');
 };
 
 export const setInputError = ($input, error) => {
-    $input.nextAll('[data-validation-error]').first()
-        .text(parseMessage(error[0], error[1]));
+    getInputError($input).text(parseMessage(error[0], error[1]));
+};
+
+export const updateInputError = ($input, errors) => {
+    if (errors.isEmpty()) {
+        clearInputError($input);
+        return;
+    }
+
+    setInputError($input, errors.last());
 };

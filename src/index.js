@@ -1,48 +1,48 @@
 import $ from 'jquery';
 import ErrorBag from './ErrorBag';
-import { validateInput, clearInputError, setInputError } from './inputHandlers';
+import { validateInput, clearInputError, updateInputError } from './inputHandlers';
 
 export const validation = {
 
     init() {
 
-        $('[data-validate] input').on('blur keyup', function(e) {
+        $('[data-validate] input').on('keyup paste', function() {
 
-            const $input = $(e.target);
-            const errors = validateInput($input);
+            const $input = $(this);
 
-            if (errors.isEmpty()) {
+            if (validateInput($input).isEmpty()) {
                 clearInputError($input);
-                return;
             }
 
-            if (e.type === 'blur') {
-                setInputError($input, errors.last());
-            }
         });
 
-        $('[data-validate]').on('submit', e => {
+        $('[data-validate] input').on('blur', function() {
+
+            const $input = $(this);
+
+            updateInputError($input, validateInput($input));
+
+        });
+
+        $('[data-validate]').on('submit', function(e) {
 
             const formErrors = new ErrorBag();
 
-            $.each($(e.target).find('input'), function (i, el) {
+            $('input', $(this)).each(function () {
 
-                const $input = $(el);
+                const $input = $(this);
                 const errors = validateInput($input);
 
                 formErrors.merge(errors);
 
-                if (formErrors.isEmpty()) {
-                    clearInputError($input);
-                    return;
-                }
+                updateInputError($input, errors);
 
-                setInputError($input, errors.last());
             });
 
             if (formErrors.hasErrors()) {
                 e.preventDefault();
             }
+
         });
     },
 };
