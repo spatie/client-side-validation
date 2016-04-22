@@ -26,8 +26,19 @@ export const validateInput = $input => {
 };
 
 const getInputError = $input => {
-    return $input.parents('[data-validate]')
+
+    const dataKey = 'validation-error-placeholder';
+
+    if ($input.data(dataKey)) {
+        return $input.data(dataKey);
+    }
+
+    $placeholder = $input.parents('[data-validate]')
         .find(`[data-validation-error="${$input.attr('name')}"]`);
+
+    $input.data(dataKey, $placeholder);
+
+    return $placeholder;
 };
 
 export const clearInputError = $input => {
