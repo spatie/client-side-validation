@@ -2,7 +2,7 @@ import $ from 'jquery';
 import ErrorBag from './ErrorBag';
 import { validateInput, clearInputError, updateInputError } from './inputHandlers';
 
-export const validation = {
+const validation = {
 
     init() {
 
@@ -47,4 +47,5 @@ export const validation = {
     },
 };
 
+export init;
 export default validation;
