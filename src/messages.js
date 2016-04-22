@@ -1,6 +1,6 @@
 import $ from 'jquery';
 
-const LANG = ($('html').attr('lang') || 'nl').toLowerCase();
+const lang = ($('html').attr('lang') || 'nl').toLowerCase();
 
 const messages = {
     nl: {
@@ -24,5 +24,5 @@ const messages = {
 };
 
 export const parseMessage = (message, parameters = {}) => {
-    return messages[LANG][message].replace(/:[\w]+/g, (key => parameters[key.slice(1)] || key));
+    return messages[lang][message].replace(/:[\w]+/g, (key => parameters[key.slice(1)] || key));
 };
