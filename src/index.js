@@ -4,38 +4,52 @@ import { validateInput, clearInputError, setInputError } from './inputHandlers';
 
 export const init = () => {
 
-    $('[data-validate] input').on('blur keyup', function(e) {
+    // Separation of event types
+    // Add Paste event
 
-        const $input = $(e.target);
+    $('[data-validate] input').on('keyup paste', function() {
+
+        const $input = $(this);
         const errors = validateInput($input);
 
         if (errors.isEmpty()) {
             clearInputError($input);
-            return;
         }
 
-        if (e.type === 'blur') {
+    });
+
+    $('[data-validate] input').on('blur', function() {
+
+        const $input = $(this);
+        const errors = validateInput($input);
+
+        if (errors.hasErrors()) {
             setInputError($input, errors.last());
         }
     });
 
-    $('[data-validate]').on('submit', e => {
+
+    $('[data-validate]').on('submit', function(e) {
 
         const formErrors = new ErrorBag();
 
-        $.each($(e.target).find('input'), function (i, el) {
+        // $.each personal preference...
 
-            const $input = $(el);
+        $('input', $(this)).each(function(){
+
+            // This block is same as 'blur' checking: extract?
+
+            const $input = $(this);
             const errors = validateInput($input);
+
+            if (errors.hasErrors()) {
+                setInputError($input, errors.last());
+            }
+
+            // End block
 
             formErrors.merge(errors);
 
-            if (formErrors.isEmpty()) {
-                clearInputError($input);
-                return;
-            }
-
-            setInputError($input, errors.last());
         });
 
         if (formErrors.hasErrors()) {

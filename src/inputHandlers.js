@@ -25,11 +25,12 @@ export const validateInput = $input => {
     return errors;
 };
 
+// More flexibility in DOM, link error explicitly to input by name
+
 export const clearInputError = $input => {
-    $input.next('[data-validation-error]').text('');
+    $('[data-validation-error=' + $input.name +']').text('');
 };
 
 export const setInputError = ($input, error) => {
-    $input.next('[data-validation-error]')
-        .text(parseMessage(error[0], error[1]));
+    $('[data-validation-error=' + $input.name +']').text(parseMessage(error[0], error[1]));
 };
