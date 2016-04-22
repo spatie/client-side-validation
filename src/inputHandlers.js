@@ -33,7 +33,7 @@ const getInputError = $input => {
         return $input.data(dataKey);
     }
 
-    $placeholder = $input.parents('[data-validate]')
+    const $placeholder = $input.parents('[data-validate]')
         .find(`[data-validation-error="${$input.attr('name')}"]`);
 
     $input.data(dataKey, $placeholder);
