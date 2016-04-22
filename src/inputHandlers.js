@@ -49,11 +49,16 @@ export const setInputError = ($input, error) => {
     getInputError($input).text(parseMessage(error[0], error[1]));
 };
 
-export const updateInputError = ($input, errors) => {
+export const updateInputError = $input => {
+
+    const errors = validateInput($input);
+
     if (errors.isEmpty()) {
         clearInputError($input);
         return;
     }
 
     setInputError($input, errors.last());
+
+    return errors;
 };
