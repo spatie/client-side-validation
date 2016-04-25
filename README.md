@@ -30,13 +30,22 @@ import validation from 'client-side-validation';
 validation.init();
 ```
 
+Your form requires a `data-validate` attribute. The validation will be applied on all inputs with validation attributes. To display errors, a `data-validation-errors` element is required.
+
 ```html
-<!-- Your form requires a `data-validate` attribute. -->
-<!-- The validation will be applied on all inputs with validation attributes. -->
 <form data-validate>
-    <input type=text required>
-    <input type=email>
-    <input type=password minlength=8 maxlength=32>
+    <div class="form_group">
+        <input type=text name=name required>
+        <span data-validation-errors=name></span>
+    </div>
+    <div class="form_group">
+        <input type=email name=email>
+        <span data-validation-errors=email></span>
+    </div>
+    <div class="form_group">
+        <input type=password name=password minlength=8 maxlength=32>
+        <span data-validation-errors=password></span>
+    </div>
 </form>
 ```
 
