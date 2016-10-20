@@ -37,6 +37,6 @@
     "is_js": "^0.8.0"
   },
   "peerDependencies": {
-    "jquery": "^2.1.4"
+    "jquery": "^2.1.4 || ^3.0.0"
   }
 }
