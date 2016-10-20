@@ -49,6 +49,8 @@ Your form requires a `data-validate` attribute. The validation will be applied o
 </form>
 ```
 
+The validation results in a CSS class `is-valid` or `is-invalid` on the input element.
+
 Currently supported:
 
 - `required`

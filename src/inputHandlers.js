@@ -42,12 +42,14 @@ const getInputError = $input => {
 };
 
 export const clearInputError = $input => {
-    $input.removeClass('$validation-error');
+    $input.removeClass('is-invalid')
+        .addClass('is-valid');
     getInputError($input).text('');
 };
 
 export const setInputError = ($input, error) => {
-    $input.addClass('$validation-error');
+    $input.removeClass('is-valid')
+        .addClass('is-invalid');
     getInputError($input).text(parseMessage(error[0], error[1]));
 };
 
