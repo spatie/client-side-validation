@@ -6,23 +6,12 @@ const validation = {
 
     init() {
 
-        $('[data-validate] input').on('keyup paste', function() {
+        $('[data-validate] input').on('keyup paste blur', function() {
 
-            const $input = $(this);
-
-            if (validateInput($input).isEmpty()) {
-                clearInputError($input);
-            }
+            updateInputError($(this));
 
         });
 
-        $('[data-validate] input').on('blur', function() {
-
-            const $input = $(this);
-
-            updateInputError($input, validateInput($input));
-
-        });
 
         $('[data-validate]').on('submit', function(e) {
 
@@ -30,12 +19,9 @@ const validation = {
 
             $('input', $(this)).each(function () {
 
-                const $input = $(this);
-                const errors = validateInput($input);
+                const errors = updateInputError($(this));
 
                 formErrors.merge(errors);
-
-                updateInputError($input, errors);
 
             });
 
